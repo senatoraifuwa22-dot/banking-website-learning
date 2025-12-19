@@ -1,0 +1,127 @@
+/*
+ * Layout primitives for the banking learning project.
+ * The PageShell sets up a navbar on top, optional sidebar on the left,
+ * and flexible main content area with sensible gaps.
+ */
+
+.page-shell {
+  min-height: 100vh;
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+}
+
+/* Top navigation bar */
+.navbar {
+  height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-24);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar__brand {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+/* Main layout grid: sidebar + content */
+.layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  min-height: calc(100vh - var(--navbar-height));
+}
+
+.sidebar {
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  padding: var(--space-24) var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.sidebar__section-title {
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.sidebar a {
+  color: var(--color-text);
+  padding: var(--space-8) var(--space-12);
+  border-radius: var(--radius-sm);
+  transition: background 0.2s ease;
+}
+
+.sidebar a:hover,
+.sidebar a:focus-visible,
+.sidebar a[aria-current="page"] {
+  background: var(--color-primary-soft);
+  color: var(--color-primary-strong);
+}
+
+.main-content {
+  padding: var(--space-32);
+  max-width: var(--content-max-width);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+  margin-bottom: var(--space-20);
+}
+
+.section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-16);
+}
+
+/* Responsive helpers */
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: var(--navbar-height);
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 var(--space-16);
+  }
+
+  .main-content {
+    padding: var(--space-24) var(--space-16);
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
