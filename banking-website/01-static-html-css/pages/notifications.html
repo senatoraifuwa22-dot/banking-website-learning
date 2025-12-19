@@ -57,24 +57,35 @@
           <h2 class="card__title">Recent alerts</h2>
           <span class="badge badge--info">3 new</span>
         </div>
-        <article class="alert alert--info">
-          <div>
-            <p class="alert__title">Deposit posted</p>
-            <p>Payroll from Northwind Traders was deposited to Everyday Checking.</p>
-          </div>
-        </article>
-        <article class="alert alert--success">
-          <div>
-            <p class="alert__title">Transfer completed</p>
-            <p>$300.00 moved from Everyday Checking to Rainy Day Savings.</p>
-          </div>
-        </article>
-        <article class="alert alert--warning">
-          <div>
-            <p class="alert__title">Card payment due</p>
-            <p>Your credit card payment of $685.20 is due in 4 days.</p>
-          </div>
-        </article>
+        <ul class="stack-md" role="list">
+          <li class="alert alert--info">
+            <div class="navbar__actions">
+              <div>
+                <p class="alert__title">Deposit posted</p>
+                <p>Payroll from Northwind Traders was deposited to Everyday Checking.</p>
+              </div>
+              <span class="badge badge--info" aria-label="Unread notification">Unread</span>
+            </div>
+          </li>
+          <li class="alert alert--success">
+            <div class="navbar__actions">
+              <div>
+                <p class="alert__title">Transfer completed</p>
+                <p>$300.00 moved from Everyday Checking to Rainy Day Savings.</p>
+              </div>
+              <span class="badge badge--info" aria-label="Unread notification">Unread</span>
+            </div>
+          </li>
+          <li class="alert alert--warning">
+            <div class="navbar__actions">
+              <div>
+                <p class="alert__title">Card payment due</p>
+                <p>Your credit card payment of $685.20 is due in 4 days.</p>
+              </div>
+              <span class="badge badge--success">Read</span>
+            </div>
+          </li>
+        </ul>
       </section>
 
       <section class="card">

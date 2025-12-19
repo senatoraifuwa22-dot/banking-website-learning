@@ -90,6 +90,35 @@
           </tbody>
         </table>
       </section>
+
+      <section class="card stack-md" aria-labelledby="adjust-balance-title">
+        <div class="card__header">
+          <h2 id="adjust-balance-title" class="card__title">Adjust balance</h2>
+          <span class="text-muted">Placeholder form for manual corrections.</span>
+        </div>
+        <form class="section-grid">
+          <div class="form-group">
+            <label for="adjust-customer">Customer</label>
+            <input id="adjust-customer" type="text" class="input" placeholder="Customer name or ID">
+          </div>
+          <div class="form-group">
+            <label for="adjust-account">Account number</label>
+            <input id="adjust-account" type="text" class="input" placeholder="**** 1234">
+          </div>
+          <div class="form-group">
+            <label for="adjust-amount">Adjustment amount</label>
+            <input id="adjust-amount" type="number" class="input" placeholder="0.00">
+          </div>
+          <div class="form-group">
+            <label for="adjust-reason">Reason</label>
+            <input id="adjust-reason" type="text" class="input" placeholder="Correction note">
+          </div>
+        </form>
+        <div class="section-header">
+          <span class="text-muted">Use this card to represent balance adjustments.</span>
+          <button class="btn btn--primary" type="button">Record adjustment</button>
+        </div>
+      </section>
     </main>
   </div>
 
