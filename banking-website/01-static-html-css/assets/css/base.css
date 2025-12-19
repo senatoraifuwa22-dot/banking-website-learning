@@ -1,0 +1,121 @@
+/*
+ * Base design tokens and element resets for the banking learning project.
+ * Keep the palette and spacing simple so students can quickly understand
+ * how a design system is wired together.
+ */
+
+:root {
+  /* Color palette */
+  --color-primary: #1f7aec;
+  --color-primary-strong: #155bb3;
+  --color-primary-soft: #e6f0ff;
+  --color-accent: #f4b400;
+
+  --color-surface: #ffffff;
+  --color-surface-muted: #f7f9fc;
+  --color-border: #e4e9f2;
+  --color-text: #1b2430;
+  --color-text-muted: #4f5b67;
+
+  --color-success: #1fbf74;
+  --color-warning: #f5a524;
+  --color-danger: #e65555;
+
+  /* Spacing scale (4px rhythm) */
+  --space-2: 0.125rem; /* 2px */
+  --space-4: 0.25rem;  /* 4px */
+  --space-8: 0.5rem;   /* 8px */
+  --space-10: 0.625rem;/* 10px */
+  --space-12: 0.75rem; /* 12px */
+  --space-16: 1rem;    /* 16px */
+  --space-20: 1.25rem; /* 20px */
+  --space-24: 1.5rem;  /* 24px */
+  --space-32: 2rem;    /* 32px */
+
+  /* Radius + shadows */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 6px 24px rgba(15, 31, 64, 0.08);
+
+  /* Typography */
+  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 2rem;
+
+  /* Layout defaults */
+  --navbar-height: 64px;
+  --sidebar-width: 240px;
+  --content-max-width: 1200px;
+}
+
+/* Reset a handful of defaults while keeping things readable. */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-md);
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-surface-muted);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: underline;
+}
+
+p {
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-16);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text);
+  margin: 0 0 var(--space-12);
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: var(--font-size-xxl); }
+h2 { font-size: var(--font-size-xl); }
+h3 { font-size: var(--font-size-lg); }
+h4 { font-size: var(--font-size-md); }
+
+/* Utility helpers for quick spacing and text tweaks */
+.stack-sm > * + * { margin-top: var(--space-8); }
+.stack-md > * + * { margin-top: var(--space-16); }
+.stack-lg > * + * { margin-top: var(--space-24); }
+
+.text-muted { color: var(--color-text-muted); }
+.text-center { text-align: center; }
+
+/* Constrain long line length for comfortable reading */
+.prose {
+  max-width: 70ch;
+}
