@@ -23,9 +23,6 @@
     </nav>
   </header>
 
-  <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
-  <div id="modal-root" class="modal-root" aria-hidden="true"></div>
-
   <div class="app-shell layout">
     <aside class="app-sidebar sidebar" aria-label="User sidebar">
       <div>
@@ -47,17 +44,17 @@
       <header class="section-header">
         <div>
           <h1>Transfer funds</h1>
-          <p class="text-muted">Move money between your accounts or send to a trusted recipient.</p>
+          <p class="text-muted">Send money between your accounts or to a beneficiary.</p>
         </div>
-        <button class="btn btn--primary" type="button">Review limits</button>
+        <span class="badge badge--info">No fee for internal transfers</span>
       </header>
 
-      <section class="card">
+      <section class="card stack-md">
         <div class="card__header">
-          <h2 class="card__title">Transfer details</h2>
-          <span class="text-muted">All fields are required.</span>
+          <h2 class="card__title">Transfer form</h2>
+          <span class="text-muted">Provide beneficiary details to continue</span>
         </div>
-        <form class="stack-md">
+        <form class="stack-md" aria-label="Transfer form">
           <div class="section-grid">
             <div class="form-group">
               <label for="from-account">From account</label>
@@ -67,32 +64,31 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="to-bank">Receiving bank</label>
-              <input id="to-bank" type="text" class="input" placeholder="Bank name or code">
+              <label for="beneficiary-name">Beneficiary name</label>
+              <input id="beneficiary-name" type="text" class="input" placeholder="Recipient full name">
             </div>
           </div>
           <div class="section-grid">
             <div class="form-group">
-              <label for="to-account">Recipient account</label>
-              <input id="to-account" type="text" class="input" placeholder="Account number or IBAN">
+              <label for="beneficiary-bank">Beneficiary bank</label>
+              <input id="beneficiary-bank" type="text" class="input" placeholder="Bank name">
             </div>
             <div class="form-group">
-              <label for="amount">Amount</label>
-              <input id="amount" type="number" class="input" placeholder="0.00">
+              <label for="account-number">Account number</label>
+              <input id="account-number" type="text" class="input" placeholder="Account number or IBAN">
             </div>
           </div>
-          <div class="form-group">
-            <label for="memo">Note (optional)</label>
-            <input id="memo" type="text" class="input" placeholder="Add a short message">
+          <div class="section-grid">
+            <div class="form-group">
+              <label for="transfer-amount">Amount</label>
+              <input id="transfer-amount" type="number" class="input" placeholder="0.00" step="0.01">
+            </div>
+            <div class="form-group">
+              <label for="transfer-note">Note</label>
+              <input id="transfer-note" type="text" class="input" placeholder="Optional message">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="transfer-date">Transfer date</label>
-            <input id="transfer-date" type="date" class="input">
-          </div>
-          <div class="section-header">
-            <span class="text-muted">A confirmation receipt will be generated after submission.</span>
-            <button class="btn btn--primary" type="submit">Submit transfer</button>
-          </div>
+          <button class="btn btn--primary" type="submit">Continue</button>
         </form>
       </section>
     </main>
@@ -103,27 +99,5 @@
       <p class="text-muted">© 2024 Bankly. All rights reserved.</p>
     </div>
   </footer>
-
-  <div id="contact-officer-modal" class="modal-backdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contact-officer-title">
-      <div class="modal__header">
-        <h2 id="contact-officer-title" class="modal__title">Contact Account Officer</h2>
-        <button class="modal__close" type="button" aria-label="Close">×</button>
-      </div>
-      <div class="modal__body stack-md">
-        <p>Need help with this transfer? Reach your officer before submitting.</p>
-        <div class="card stack-sm">
-          <div><strong>Name:</strong> <span id="officer-name">Avery Lane</span></div>
-          <div><strong>Phone:</strong> <span id="officer-phone">(800) 555-0141</span></div>
-          <div><strong>Email:</strong> <span id="officer-email">avery.lane@bankly.io</span></div>
-          <div><strong>Reference:</strong> <span id="officer-ref">REF-48219</span></div>
-        </div>
-      </div>
-      <div class="modal__footer">
-        <button class="btn btn--ghost" type="button">Close</button>
-        <button class="btn btn--primary" type="button">Send message</button>
-      </div>
-    </div>
-  </div>
 </body>
 </html>

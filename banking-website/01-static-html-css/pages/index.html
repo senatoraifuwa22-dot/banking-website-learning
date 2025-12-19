@@ -24,34 +24,49 @@
 
   <div class="app-shell">
     <main class="app-main main-content">
-      <section class="card">
-        <div class="card__header">
-          <h1 class="card__title">Welcome to Bankly</h1>
-          <span class="badge badge--info">Secure &amp; Simple</span>
-        </div>
-        <p>Manage your money with confidence. Bankly keeps your everyday banking, savings, and transfers organized in one clear view.</p>
+      <section class="card stack-lg">
         <div class="section-grid">
-          <div class="card">
-            <div class="card__header">
-              <h2 class="card__title">Everyday banking</h2>
-              <span class="badge badge--success">Ready</span>
+          <div class="stack-md">
+            <p class="badge badge--info" aria-label="Secure banking badge">Secure &amp; simple banking</p>
+            <h1 class="card__title">Banking that keeps up with you</h1>
+            <p class="text-lg">Track balances, move money, and reach your savings goals with a clear, calm experience.</p>
+            <div class="section-header">
+              <a class="btn btn--primary" href="register.html">Open an account</a>
+              <a class="btn btn--ghost" href="login.html">Already a customer? Login</a>
             </div>
-            <p>Track balances, review recent activity, and keep your accounts on top of their goals with helpful insights.</p>
           </div>
-          <div class="card">
+          <div class="card card--muted stack-md" aria-label="Highlights">
+            <h2 class="card__title">Why Bankly</h2>
+            <ul class="list">
+              <li>FDIC-insured accounts with layered security controls.</li>
+              <li>Instant transfers and clear confirmations.</li>
+              <li>Friendly support ready to help when you need it.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section-grid" aria-label="Feature highlights">
+          <article class="card">
             <div class="card__header">
-              <h2 class="card__title">Fast payments</h2>
-              <span class="badge badge--info">Instant</span>
+              <h3 class="card__title">Smarter everyday banking</h3>
+              <span class="badge badge--success">Checking</span>
             </div>
-            <p>Send money to friends, move funds between accounts, and pay bills with clear confirmations every time.</p>
-          </div>
-          <div class="card">
+            <p>Real-time balances, clear statements, and easy bill pays keep your daily finances moving smoothly.</p>
+          </article>
+          <article class="card">
             <div class="card__header">
-              <h2 class="card__title">Peace of mind</h2>
-              <span class="badge badge--warning">Protected</span>
+              <h3 class="card__title">Grow your savings</h3>
+              <span class="badge badge--info">Goals</span>
             </div>
-            <p>Stay in control with timely alerts, privacy-first defaults, and layered security across every session.</p>
-          </div>
+            <p>Create savings goals, automate contributions, and watch progress with friendly nudges.</p>
+          </article>
+          <article class="card">
+            <div class="card__header">
+              <h3 class="card__title">Send with confidence</h3>
+              <span class="badge badge--warning">Transfers</span>
+            </div>
+            <p>Transfer funds to friends or between accounts with locked-in confirmations and clear receipts.</p>
+          </article>
         </div>
       </section>
     </main>

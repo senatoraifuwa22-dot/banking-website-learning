@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../assets/css/base.css">
   <link rel="stylesheet" href="../assets/css/layout.css">
   <link rel="stylesheet" href="../assets/css/components.css">
-  <link rel="stylesheet" href="../assets/css/pages/accounts.css">
+  <link rel="stylesheet" href="../assets/css/pages/admin.css">
 </head>
 <body class="page-shell">
   <header class="app-header navbar">
@@ -21,9 +21,6 @@
       <a href="admin-login.html">Logout</a>
     </nav>
   </header>
-
-  <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
-  <div id="modal-root" class="modal-root" aria-hidden="true"></div>
 
   <div class="app-shell layout">
     <aside class="app-sidebar sidebar" aria-label="Admin sidebar">
@@ -44,80 +41,58 @@
     <main class="app-main main-content">
       <header class="section-header">
         <div>
-          <h1>Customer accounts</h1>
-          <p class="text-muted">Review balances and statuses across all customer accounts.</p>
+          <h1>Accounts</h1>
+          <p class="text-muted">Monitor balances and make adjustments when needed.</p>
         </div>
-        <button class="btn btn--primary" type="button">New account</button>
       </header>
 
-      <section class="card">
+      <section class="card stack-md">
         <div class="card__header">
-          <h2 class="card__title">Account list</h2>
-          <span class="badge badge--info">Sample data</span>
+          <h2 class="card__title">Accounts table</h2>
+          <span class="text-muted">Static placeholder data</span>
         </div>
-        <table class="table" aria-label="Customer accounts">
+        <table class="table" aria-label="Accounts table">
           <thead>
             <tr>
-              <th scope="col">Customer</th>
               <th scope="col">Account</th>
+              <th scope="col">Owner</th>
               <th scope="col">Type</th>
               <th scope="col">Balance</th>
               <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Alex Morgan</td>
-              <td>**** 1024</td>
-              <td>Checking</td>
-              <td>$4,850.00</td>
-              <td><span class="badge badge--success">Active</span></td>
-            </tr>
-            <tr>
-              <td>Jordan Rivers</td>
-              <td>**** 7777</td>
-              <td>Savings</td>
-              <td>$12,400.00</td>
-              <td><span class="badge badge--info">Good standing</span></td>
-            </tr>
-            <tr>
-              <td>Casey Lee</td>
-              <td>**** 9090</td>
-              <td>Checking</td>
-              <td>$18,230.45</td>
-              <td><span class="badge badge--warning">Review</span></td>
-            </tr>
+            <tr><td>Everyday Checking</td><td>Alex Morgan</td><td>Checking</td><td>$8,250.00</td><td><span class="badge badge--success">Active</span></td></tr>
+            <tr><td>Rainy Day Savings</td><td>Alex Morgan</td><td>Savings</td><td>$19,230.45</td><td><span class="badge badge--info">Growing</span></td></tr>
+            <tr><td>Travel Fund</td><td>Jordan Rivers</td><td>Savings</td><td>$1,120.00</td><td><span class="badge badge--warning">Goal</span></td></tr>
           </tbody>
         </table>
       </section>
 
-      <section class="card stack-md" aria-labelledby="adjust-balance-title">
+      <section class="card stack-md">
         <div class="card__header">
-          <h2 id="adjust-balance-title" class="card__title">Adjust balance</h2>
-          <span class="text-muted">Placeholder form for manual corrections.</span>
+          <h2 class="card__title">Adjust balance</h2>
+          <span class="text-muted">Placeholder form for manual adjustments</span>
         </div>
-        <form class="section-grid">
+        <form class="section-grid" aria-label="Adjust balance form">
           <div class="form-group">
-            <label for="adjust-customer">Customer</label>
-            <input id="adjust-customer" type="text" class="input" placeholder="Customer name or ID">
-          </div>
-          <div class="form-group">
-            <label for="adjust-account">Account number</label>
-            <input id="adjust-account" type="text" class="input" placeholder="**** 1234">
+            <label for="account-select">Account</label>
+            <select id="account-select" class="input">
+              <option>Everyday Checking</option>
+              <option>Rainy Day Savings</option>
+              <option>Travel Fund</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="adjust-amount">Adjustment amount</label>
-            <input id="adjust-amount" type="number" class="input" placeholder="0.00">
+            <input id="adjust-amount" type="number" class="input" placeholder="0.00" step="0.01">
           </div>
           <div class="form-group">
             <label for="adjust-reason">Reason</label>
-            <input id="adjust-reason" type="text" class="input" placeholder="Correction note">
+            <input id="adjust-reason" type="text" class="input" placeholder="Reason for adjustment">
           </div>
+          <button class="btn btn--primary" type="submit">Submit adjustment</button>
         </form>
-        <div class="section-header">
-          <span class="text-muted">Use this card to represent balance adjustments.</span>
-          <button class="btn btn--primary" type="button">Record adjustment</button>
-        </div>
       </section>
     </main>
   </div>
@@ -127,27 +102,5 @@
       <p class="text-muted">© 2024 Bankly. Admin workspace.</p>
     </div>
   </footer>
-
-  <div id="contact-officer-modal" class="modal-backdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contact-officer-title">
-      <div class="modal__header">
-        <h2 id="contact-officer-title" class="modal__title">Contact Account Officer</h2>
-        <button class="modal__close" type="button" aria-label="Close">×</button>
-      </div>
-      <div class="modal__body stack-md">
-        <p>Coordinate account changes with the assigned officer for this portfolio.</p>
-        <div class="card stack-sm">
-          <div><strong>Name:</strong> <span id="officer-name">Avery Lane</span></div>
-          <div><strong>Phone:</strong> <span id="officer-phone">(800) 555-0141</span></div>
-          <div><strong>Email:</strong> <span id="officer-email">avery.lane@bankly.io</span></div>
-          <div><strong>Reference:</strong> <span id="officer-ref">REF-48219</span></div>
-        </div>
-      </div>
-      <div class="modal__footer">
-        <button class="btn btn--ghost" type="button">Close</button>
-        <button class="btn btn--primary" type="button">Send message</button>
-      </div>
-    </div>
-  </div>
 </body>
 </html>

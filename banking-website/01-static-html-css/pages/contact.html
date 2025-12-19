@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="../assets/css/base.css">
   <link rel="stylesheet" href="../assets/css/layout.css">
   <link rel="stylesheet" href="../assets/css/components.css">
-  <link rel="stylesheet" href="../assets/css/pages/home.css">
 </head>
 <body class="page-shell">
   <header class="app-header navbar">
@@ -24,39 +23,45 @@
 
   <div class="app-shell">
     <main class="app-main main-content">
-      <section class="card prose">
-        <h1>We are here to help</h1>
-        <p>Send us a quick note and our support team will follow up with clear next steps.</p>
-        <div class="section-grid">
-          <div class="card">
-            <h2 class="card__title">Call or email</h2>
-            <p>Phone: (800) 555-0199<br>Support: support@bankly.io</p>
-            <p class="text-muted">Hours: Monday–Friday, 8am–6pm EST</p>
+      <section class="card stack-lg">
+        <div class="section-header">
+          <div>
+            <h1>We'd love to hear from you</h1>
+            <p class="text-muted">Send us a message or visit our office for in-person support.</p>
           </div>
-          <div class="card">
-            <h2 class="card__title">Visit us</h2>
-            <p>123 Finance Ave<br>Suite 400<br>New York, NY 10001</p>
-            <p class="text-muted">Meetings available by appointment.</p>
+          <span class="badge badge--info">Support hours: 9am-6pm</span>
+        </div>
+        <div class="section-grid">
+          <form class="card stack-md" aria-label="Contact form">
+            <div class="card__header">
+              <h2 class="card__title">Send a message</h2>
+              <span class="text-muted">We'll reply within one business day.</span>
+            </div>
+            <div class="form-group">
+              <label for="contact-name">Full name</label>
+              <input id="contact-name" type="text" class="input" placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label for="contact-email">Email</label>
+              <input id="contact-email" type="email" class="input" placeholder="you@example.com">
+            </div>
+            <div class="form-group">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" class="input" rows="4" placeholder="How can we help?"></textarea>
+            </div>
+            <button class="btn btn--primary" type="submit">Submit</button>
+          </form>
+
+          <div class="card stack-md" aria-label="Office address">
+            <div class="card__header">
+              <h2 class="card__title">Visit us</h2>
+              <span class="text-muted">Head office</span>
+            </div>
+            <p>1234 Placeholder Avenue<br>Suite 500<br>Metropolis, ST 12345</p>
+            <p class="text-muted">Monday to Friday, 9:00 AM – 6:00 PM</p>
+            <p><strong>Phone:</strong> (800) 555-0199<br><strong>Email:</strong> support@bankly.example</p>
           </div>
         </div>
-        <form class="stack-md" aria-label="Contact form">
-          <div class="form-group">
-            <label for="contact-name">Full name</label>
-            <input id="contact-name" type="text" class="input" placeholder="Your name">
-          </div>
-          <div class="form-group">
-            <label for="contact-email">Email address</label>
-            <input id="contact-email" type="email" class="input" placeholder="you@example.com">
-          </div>
-          <div class="form-group">
-            <label for="contact-message">How can we help?</label>
-            <textarea id="contact-message" class="input" rows="4" placeholder="Share a few details"></textarea>
-          </div>
-          <div class="section-header">
-            <span class="text-muted">We usually reply within one business day.</span>
-            <button class="btn btn--primary" type="submit">Send message</button>
-          </div>
-        </form>
       </section>
     </main>
   </div>
