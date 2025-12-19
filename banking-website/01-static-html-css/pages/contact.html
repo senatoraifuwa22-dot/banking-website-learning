@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Bankly</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/home.css">
+</head>
+<body class="page-shell">
+  <header class="app-header navbar">
+    <div class="navbar__brand">Bankly</div>
+    <nav class="navbar__actions" aria-label="Public navigation">
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </header>
+
+  <div class="app-shell">
+    <main class="app-main main-content">
+      <section class="card prose">
+        <h1>We are here to help</h1>
+        <p>Send us a quick note and our support team will follow up with clear next steps.</p>
+        <div class="section-grid">
+          <div class="card">
+            <h2 class="card__title">Call or email</h2>
+            <p>Phone: (800) 555-0199<br>Support: support@bankly.io</p>
+            <p class="text-muted">Hours: Monday–Friday, 8am–6pm EST</p>
+          </div>
+          <div class="card">
+            <h2 class="card__title">Visit us</h2>
+            <p>123 Finance Ave<br>Suite 400<br>New York, NY 10001</p>
+            <p class="text-muted">Meetings available by appointment.</p>
+          </div>
+        </div>
+        <form class="stack-md" aria-label="Contact form">
+          <div class="form-group">
+            <label for="contact-name">Full name</label>
+            <input id="contact-name" type="text" class="input" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Email address</label>
+            <input id="contact-email" type="email" class="input" placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label for="contact-message">How can we help?</label>
+            <textarea id="contact-message" class="input" rows="4" placeholder="Share a few details"></textarea>
+          </div>
+          <div class="section-header">
+            <span class="text-muted">We usually reply within one business day.</span>
+            <button class="btn btn--primary" type="submit">Send message</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <footer class="app-footer">
+    <div class="main-content">
+      <p class="text-muted">© 2024 Bankly. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
