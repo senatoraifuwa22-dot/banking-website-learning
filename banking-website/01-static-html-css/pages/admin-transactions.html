@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../assets/css/base.css">
   <link rel="stylesheet" href="../assets/css/layout.css">
   <link rel="stylesheet" href="../assets/css/components.css">
-  <link rel="stylesheet" href="../assets/css/pages/transactions.css">
+  <link rel="stylesheet" href="../assets/css/pages/admin.css">
 </head>
 <body class="page-shell">
   <header class="app-header navbar">
@@ -21,9 +21,6 @@
       <a href="admin-login.html">Logout</a>
     </nav>
   </header>
-
-  <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
-  <div id="modal-root" class="modal-root" aria-hidden="true"></div>
 
   <div class="app-shell layout">
     <aside class="app-sidebar sidebar" aria-label="Admin sidebar">
@@ -44,84 +41,60 @@
     <main class="app-main main-content">
       <header class="section-header">
         <div>
-          <h1>Transaction review</h1>
-          <p class="text-muted">Monitor high-value payments and handle approvals or escalations.</p>
-        </div>
-        <div class="navbar__actions">
-          <button class="btn btn--ghost" type="button">Export</button>
-          <button class="btn btn--primary" type="button">Bulk approve</button>
+          <h1>Transactions</h1>
+          <p class="text-muted">Review and edit transaction statuses.</p>
         </div>
       </header>
 
-      <section class="card">
+      <section class="card stack-md">
         <div class="card__header">
-          <h2 class="card__title">Flagged transactions</h2>
-          <span class="badge badge--warning">Manual review</span>
+          <h2 class="card__title">Transactions table</h2>
+          <span class="text-muted">Placeholder queue</span>
         </div>
-        <table class="table" aria-label="Flagged transactions">
+        <table class="table" aria-label="Transactions table">
           <thead>
             <tr>
               <th scope="col">Reference</th>
               <th scope="col">Customer</th>
+              <th scope="col">Type</th>
               <th scope="col">Amount</th>
-              <th scope="col">Reason</th>
               <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>TXN-8831</td>
-              <td>Casey Lee</td>
-              <td>$12,400.00</td>
-              <td>International wire</td>
-              <td><span class="badge badge--warning">Review</span></td>
-            </tr>
-            <tr>
-              <td>TXN-7742</td>
-              <td>Jordan Rivers</td>
-              <td>$5,800.00</td>
-              <td>Amount threshold</td>
-              <td><span class="badge badge--info">Pending</span></td>
-            </tr>
-            <tr>
-              <td>TXN-5518</td>
-              <td>Alex Morgan</td>
-              <td>$300.00</td>
-              <td>Customer request</td>
-              <td><span class="badge badge--success">Cleared</span></td>
-            </tr>
+            <tr><td>TX-1001</td><td>Alex Morgan</td><td>Transfer</td><td>$500.00</td><td><span class="badge badge--info">Pending</span></td></tr>
+            <tr><td>TX-1002</td><td>Jordan Rivers</td><td>Payment</td><td>$86.45</td><td><span class="badge badge--success">Posted</span></td></tr>
+            <tr><td>TX-1003</td><td>Casey Lee</td><td>Deposit</td><td>$1,250.00</td><td><span class="badge badge--warning">Review</span></td></tr>
+            <tr><td>TX-1004</td><td>Avery Lane</td><td>Withdrawal</td><td>$120.00</td><td><span class="badge badge--success">Posted</span></td></tr>
           </tbody>
         </table>
       </section>
 
-      <section class="card stack-md" aria-labelledby="edit-status-title">
+      <section class="card stack-md">
         <div class="card__header">
-          <h2 id="edit-status-title" class="card__title">Edit status</h2>
-          <span class="text-muted">Placeholder controls for updating transaction outcomes.</span>
+          <h2 class="card__title">Edit status</h2>
+          <span class="text-muted">Placeholder controls for queue actions</span>
         </div>
-        <form class="section-grid">
+        <form class="section-grid" aria-label="Edit transaction status">
           <div class="form-group">
-            <label for="edit-reference">Reference ID</label>
-            <input id="edit-reference" type="text" class="input" placeholder="TXN-0000">
+            <label for="reference-id">Reference ID</label>
+            <input id="reference-id" type="text" class="input" placeholder="TX-1001">
           </div>
           <div class="form-group">
-            <label for="edit-status">New status</label>
-            <select id="edit-status" class="input">
+            <label for="status-select">Status</label>
+            <select id="status-select" class="input">
               <option>Pending</option>
-              <option>Cleared</option>
+              <option>Posted</option>
               <option>Review</option>
               <option>Declined</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="edit-notes">Notes</label>
-            <input id="edit-notes" type="text" class="input" placeholder="Add context or decision reason">
+            <label for="status-note">Note</label>
+            <input id="status-note" type="text" class="input" placeholder="Add an internal note">
           </div>
+          <button class="btn btn--primary" type="submit">Update status</button>
         </form>
-        <div class="section-header">
-          <span class="text-muted">Use this section to model status updates.</span>
-          <button class="btn btn--primary" type="button">Save status</button>
-        </div>
       </section>
     </main>
   </div>
@@ -131,27 +104,5 @@
       <p class="text-muted">© 2024 Bankly. Admin workspace.</p>
     </div>
   </footer>
-
-  <div id="contact-officer-modal" class="modal-backdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contact-officer-title">
-      <div class="modal__header">
-        <h2 id="contact-officer-title" class="modal__title">Contact Account Officer</h2>
-        <button class="modal__close" type="button" aria-label="Close">×</button>
-      </div>
-      <div class="modal__body stack-md">
-        <p>Coordinate with the account officer before finalizing high-risk items.</p>
-        <div class="card stack-sm">
-          <div><strong>Name:</strong> <span id="officer-name">Avery Lane</span></div>
-          <div><strong>Phone:</strong> <span id="officer-phone">(800) 555-0141</span></div>
-          <div><strong>Email:</strong> <span id="officer-email">avery.lane@bankly.io</span></div>
-          <div><strong>Reference:</strong> <span id="officer-ref">REF-48219</span></div>
-        </div>
-      </div>
-      <div class="modal__footer">
-        <button class="btn btn--ghost" type="button">Close</button>
-        <button class="btn btn--primary" type="button">Send message</button>
-      </div>
-    </div>
-  </div>
 </body>
 </html>

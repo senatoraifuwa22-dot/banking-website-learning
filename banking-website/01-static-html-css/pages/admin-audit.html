@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../assets/css/base.css">
   <link rel="stylesheet" href="../assets/css/layout.css">
   <link rel="stylesheet" href="../assets/css/components.css">
-  <link rel="stylesheet" href="../assets/css/pages/transactions.css">
+  <link rel="stylesheet" href="../assets/css/pages/admin.css">
 </head>
 <body class="page-shell">
   <header class="app-header navbar">
@@ -21,9 +21,6 @@
       <a href="admin-login.html">Logout</a>
     </nav>
   </header>
-
-  <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
-  <div id="modal-root" class="modal-root" aria-hidden="true"></div>
 
   <div class="app-shell layout">
     <aside class="app-sidebar sidebar" aria-label="Admin sidebar">
@@ -45,50 +42,31 @@
       <header class="section-header">
         <div>
           <h1>Audit log</h1>
-          <p class="text-muted">Track admin actions and changes for compliance reviews.</p>
-        </div>
-        <div class="navbar__actions">
-          <button class="btn btn--ghost" type="button">Export log</button>
-          <button class="btn btn--primary" type="button">Archive</button>
+          <p class="text-muted">Placeholder entries for admin actions.</p>
         </div>
       </header>
 
-      <section class="card">
+      <section class="card stack-md">
         <div class="card__header">
-          <h2 class="card__title">Recent events</h2>
-          <span class="badge badge--info">24h</span>
+          <h2 class="card__title">Audit entries</h2>
+          <span class="text-muted">Tracks changes for compliance</span>
         </div>
-        <table class="table" aria-label="Audit events">
+        <table class="table" aria-label="Audit log table">
           <thead>
             <tr>
               <th scope="col">Timestamp</th>
-              <th scope="col">User</th>
+              <th scope="col">Admin</th>
               <th scope="col">Action</th>
-              <th scope="col">Details</th>
+              <th scope="col">Target</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Apr 18, 10:14</td>
-              <td>Jamie Fox</td>
-              <td>Approved transfer</td>
-              <td>TXN-8831 set to Cleared</td>
-            </tr>
-            <tr>
-              <td>Apr 18, 08:03</td>
-              <td>Priya Patel</td>
-              <td>Updated user role</td>
-              <td>Samir Chen → Risk reviewer</td>
-            </tr>
-            <tr>
-              <td>Apr 17, 17:44</td>
-              <td>Jamie Fox</td>
-              <td>Exported audit log</td>
-              <td>30-day CSV downloaded</td>
-            </tr>
+            <tr><td>2024-05-02 10:14</td><td>Pat Taylor</td><td>Approved transaction</td><td>TX-1001</td></tr>
+            <tr><td>2024-05-02 09:42</td><td>Pat Taylor</td><td>Updated user role</td><td>Jordan Rivers</td></tr>
+            <tr><td>2024-05-01 16:05</td><td>Sam Lee</td><td>Adjusted balance</td><td>Everyday Checking</td></tr>
+            <tr><td>2024-05-01 14:22</td><td>Sam Lee</td><td>Locked account</td><td>Travel Fund</td></tr>
           </tbody>
         </table>
-        <p class="text-muted">This table is a placeholder for the full audit log feed.</p>
       </section>
     </main>
   </div>
@@ -98,27 +76,5 @@
       <p class="text-muted">© 2024 Bankly. Admin workspace.</p>
     </div>
   </footer>
-
-  <div id="contact-officer-modal" class="modal-backdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contact-officer-title">
-      <div class="modal__header">
-        <h2 id="contact-officer-title" class="modal__title">Contact Account Officer</h2>
-        <button class="modal__close" type="button" aria-label="Close">×</button>
-      </div>
-      <div class="modal__body stack-md">
-        <p>Escalate compliance questions to the assigned officer.</p>
-        <div class="card stack-sm">
-          <div><strong>Name:</strong> <span id="officer-name">Avery Lane</span></div>
-          <div><strong>Phone:</strong> <span id="officer-phone">(800) 555-0141</span></div>
-          <div><strong>Email:</strong> <span id="officer-email">avery.lane@bankly.io</span></div>
-          <div><strong>Reference:</strong> <span id="officer-ref">REF-48219</span></div>
-        </div>
-      </div>
-      <div class="modal__footer">
-        <button class="btn btn--ghost" type="button">Close</button>
-        <button class="btn btn--primary" type="button">Send message</button>
-      </div>
-    </div>
-  </div>
 </body>
 </html>

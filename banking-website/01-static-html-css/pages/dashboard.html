@@ -23,9 +23,6 @@
     </nav>
   </header>
 
-  <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
-  <div id="modal-root" class="modal-root" aria-hidden="true"></div>
-
   <div class="app-shell layout">
     <aside class="app-sidebar sidebar" aria-label="User sidebar">
       <div>
@@ -47,41 +44,38 @@
       <header class="section-header">
         <div>
           <h1>Account overview</h1>
-          <p class="text-muted">Quick snapshot of balances, spending, and recent updates.</p>
+          <p class="text-muted">Snapshot of your balances and the latest activity across accounts.</p>
         </div>
-        <button class="btn btn--primary" type="button">New transfer</button>
+        <a class="btn btn--primary" href="transfer.html">New transfer</a>
       </header>
 
-      <div class="section-grid">
-        <div class="card">
+      <div class="section-grid" aria-label="Balance summary">
+        <article class="card">
+          <div class="card__header">
+            <h2 class="card__title">Total balance</h2>
+            <span class="badge badge--info">All accounts</span>
+          </div>
+          <p class="card__body text-xl"><strong>$27,480.45</strong></p>
+        </article>
+        <article class="card">
           <div class="card__header">
             <h2 class="card__title">Checking</h2>
-            <span class="badge badge--success">Active</span>
+            <span class="badge badge--success">Primary</span>
           </div>
-          <p class="card__meta">•••• 1024</p>
-          <p class="card__body">Current balance: <strong>$4,850.00</strong></p>
-        </div>
-        <div class="card">
+          <p class="card__body">Current balance: <strong>$8,250.00</strong></p>
+        </article>
+        <article class="card">
           <div class="card__header">
             <h2 class="card__title">Savings</h2>
-            <span class="badge badge--info">Goal</span>
+            <span class="badge badge--warning">Goal in progress</span>
           </div>
-          <p class="card__meta">Auto-save every Friday</p>
-          <p class="card__body">Current balance: <strong>$12,400.00</strong></p>
-        </div>
-        <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">Credit card</h2>
-            <span class="badge badge--warning">Payment due</span>
-          </div>
-          <p class="card__meta">Statement closes in 4 days</p>
-          <p class="card__body">Balance due: <strong>$685.20</strong></p>
-        </div>
+          <p class="card__body">Current balance: <strong>$19,230.45</strong></p>
+        </article>
       </div>
 
-      <section class="card">
+      <section class="card stack-md">
         <div class="card__header">
-          <h2 class="card__title">Recent activity</h2>
+          <h2 class="card__title">Recent transactions</h2>
           <a class="btn btn--link" href="transactions.html">View all</a>
         </div>
         <table class="table" aria-label="Recent transactions">
@@ -95,22 +89,34 @@
           </thead>
           <tbody>
             <tr>
-              <td>Apr 18</td>
-              <td>Coffee Shop</td>
-              <td>Food &amp; Drink</td>
-              <td>-$8.50</td>
-            </tr>
-            <tr>
-              <td>Apr 17</td>
-              <td>Payroll Deposit</td>
+              <td>May 02</td>
+              <td>Payroll deposit</td>
               <td>Income</td>
-              <td>+$2,800.00</td>
+              <td>+$2,900.00</td>
             </tr>
             <tr>
-              <td>Apr 16</td>
-              <td>Utilities</td>
+              <td>May 01</td>
+              <td>Utility bill</td>
               <td>Bills</td>
               <td>-$120.00</td>
+            </tr>
+            <tr>
+              <td>Apr 30</td>
+              <td>Groceries</td>
+              <td>Household</td>
+              <td>-$86.45</td>
+            </tr>
+            <tr>
+              <td>Apr 29</td>
+              <td>Transfer to savings</td>
+              <td>Transfer</td>
+              <td>-$300.00</td>
+            </tr>
+            <tr>
+              <td>Apr 28</td>
+              <td>Coffee shop</td>
+              <td>Food &amp; Drink</td>
+              <td>-$9.25</td>
             </tr>
           </tbody>
         </table>
@@ -123,27 +129,5 @@
       <p class="text-muted">© 2024 Bankly. All rights reserved.</p>
     </div>
   </footer>
-
-  <div id="contact-officer-modal" class="modal-backdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contact-officer-title">
-      <div class="modal__header">
-        <h2 id="contact-officer-title" class="modal__title">Contact Account Officer</h2>
-        <button class="modal__close" type="button" aria-label="Close">×</button>
-      </div>
-      <div class="modal__body stack-md">
-        <p>Reach out to your assigned officer for account questions or approvals.</p>
-        <div class="card stack-sm">
-          <div><strong>Name:</strong> <span id="officer-name">Avery Lane</span></div>
-          <div><strong>Phone:</strong> <span id="officer-phone">(800) 555-0141</span></div>
-          <div><strong>Email:</strong> <span id="officer-email">avery.lane@bankly.io</span></div>
-          <div><strong>Reference:</strong> <span id="officer-ref">REF-48219</span></div>
-        </div>
-      </div>
-      <div class="modal__footer">
-        <button class="btn btn--ghost" type="button">Close</button>
-        <button class="btn btn--primary" type="button">Send message</button>
-      </div>
-    </div>
-  </div>
 </body>
 </html>

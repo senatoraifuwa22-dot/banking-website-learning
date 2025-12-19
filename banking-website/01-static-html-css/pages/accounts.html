@@ -23,9 +23,6 @@
     </nav>
   </header>
 
-  <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
-  <div id="modal-root" class="modal-root" aria-hidden="true"></div>
-
   <div class="app-shell layout">
     <aside class="app-sidebar sidebar" aria-label="User sidebar">
       <div>
@@ -47,50 +44,17 @@
       <header class="section-header">
         <div>
           <h1>Your accounts</h1>
-          <p class="text-muted">Balances, account numbers, and quick actions are summarized below.</p>
+          <p class="text-muted">View balances, account numbers, and select an account for more detail.</p>
         </div>
         <button class="btn btn--primary" type="button">Open new account</button>
       </header>
 
-      <section class="card">
+      <section class="card stack-md">
         <div class="card__header">
-          <h2 class="card__title">Balances</h2>
-          <span class="badge badge--info">Updated daily</span>
+          <h2 class="card__title">Accounts list</h2>
+          <span class="text-muted">Summary of your accounts</span>
         </div>
-        <div class="section-grid">
-          <div class="card">
-            <div class="card__header">
-              <h3 class="card__title">Everyday Checking</h3>
-              <span class="badge badge--success">Primary</span>
-            </div>
-            <p class="card__meta">Account ending ••24</p>
-            <p class="card__body">Balance: <strong>$4,850.00</strong></p>
-          </div>
-          <div class="card">
-            <div class="card__header">
-              <h3 class="card__title">Rainy Day Savings</h3>
-              <span class="badge badge--info">Goal</span>
-            </div>
-            <p class="card__meta">Account ending ••77</p>
-            <p class="card__body">Balance: <strong>$12,400.00</strong></p>
-          </div>
-          <div class="card">
-            <div class="card__header">
-              <h3 class="card__title">Business Checking</h3>
-              <span class="badge badge--warning">Shared</span>
-            </div>
-            <p class="card__meta">Account ending ••90</p>
-            <p class="card__body">Balance: <strong>$18,230.45</strong></p>
-          </div>
-        </div>
-      </section>
-
-      <section class="card">
-        <div class="card__header">
-          <h2 class="card__title">Account directory</h2>
-          <span class="text-muted">Use these details for transfers and payments.</span>
-        </div>
-        <table class="table" aria-label="Account directory">
+        <table class="table" aria-label="Accounts list">
           <thead>
             <tr>
               <th scope="col">Account</th>
@@ -104,23 +68,23 @@
             <tr>
               <td>Everyday Checking</td>
               <td>Checking</td>
-              <td>**** 1024</td>
-              <td>$4,850.00</td>
+              <td>•••• 1024</td>
+              <td>$8,250.00</td>
               <td><span class="badge badge--success">Active</span></td>
             </tr>
             <tr>
               <td>Rainy Day Savings</td>
               <td>Savings</td>
-              <td>**** 7777</td>
-              <td>$12,400.00</td>
+              <td>•••• 7755</td>
+              <td>$19,230.45</td>
               <td><span class="badge badge--info">Growing</span></td>
             </tr>
             <tr>
-              <td>Business Checking</td>
-              <td>Checking</td>
-              <td>**** 9090</td>
-              <td>$18,230.45</td>
-              <td><span class="badge badge--warning">Shared</span></td>
+              <td>Travel Fund</td>
+              <td>Savings</td>
+              <td>•••• 8899</td>
+              <td>$1,120.00</td>
+              <td><span class="badge badge--warning">Goal</span></td>
             </tr>
           </tbody>
         </table>
@@ -129,7 +93,7 @@
       <section class="card stack-md" aria-labelledby="account-detail-title">
         <div class="card__header">
           <h2 id="account-detail-title" class="card__title">Account detail</h2>
-          <span class="text-muted">Placeholder view for a selected account.</span>
+          <span class="text-muted">Placeholder for a selected account</span>
         </div>
         <div class="section-grid">
           <div>
@@ -138,7 +102,7 @@
           </div>
           <div>
             <p class="text-muted">Account number</p>
-            <p><strong>**** 1024</strong></p>
+            <p><strong>•••• 1024</strong></p>
           </div>
           <div>
             <p class="text-muted">Routing number</p>
@@ -149,28 +113,7 @@
             <p><span class="badge badge--success">Active</span></p>
           </div>
         </div>
-        <div class="section-grid">
-          <div>
-            <p class="text-muted">Available balance</p>
-            <p><strong>$4,850.00</strong></p>
-          </div>
-          <div>
-            <p class="text-muted">Hold amount</p>
-            <p><strong>$0.00</strong></p>
-          </div>
-          <div>
-            <p class="text-muted">Branch contact</p>
-            <p><strong>Downtown Office</strong></p>
-          </div>
-          <div>
-            <p class="text-muted">Notes</p>
-            <p>Set alerts for balances under $500.</p>
-          </div>
-        </div>
-        <div class="section-header">
-          <span class="text-muted">Use this space to display more detailed account info.</span>
-          <button class="btn btn--ghost" type="button">View statements</button>
-        </div>
+        <p class="text-muted">Use this card to show recent activity, limits, or other details about the selected account.</p>
       </section>
     </main>
   </div>
@@ -180,27 +123,5 @@
       <p class="text-muted">© 2024 Bankly. All rights reserved.</p>
     </div>
   </footer>
-
-  <div id="contact-officer-modal" class="modal-backdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contact-officer-title">
-      <div class="modal__header">
-        <h2 id="contact-officer-title" class="modal__title">Contact Account Officer</h2>
-        <button class="modal__close" type="button" aria-label="Close">×</button>
-      </div>
-      <div class="modal__body stack-md">
-        <p>Need account help? Reach your assigned officer for quick support.</p>
-        <div class="card stack-sm">
-          <div><strong>Name:</strong> <span id="officer-name">Avery Lane</span></div>
-          <div><strong>Phone:</strong> <span id="officer-phone">(800) 555-0141</span></div>
-          <div><strong>Email:</strong> <span id="officer-email">avery.lane@bankly.io</span></div>
-          <div><strong>Reference:</strong> <span id="officer-ref">REF-48219</span></div>
-        </div>
-      </div>
-      <div class="modal__footer">
-        <button class="btn btn--ghost" type="button">Close</button>
-        <button class="btn btn--primary" type="button">Send message</button>
-      </div>
-    </div>
-  </div>
 </body>
 </html>
