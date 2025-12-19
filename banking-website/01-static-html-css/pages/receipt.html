@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Receipt | Bankly</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/dashboard.css">
+</head>
+<body class="page-shell">
+  <header class="app-header navbar">
+    <div class="navbar__brand">Bankly</div>
+    <nav class="navbar__actions" aria-label="User navigation">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="accounts.html">Accounts</a>
+      <a href="transactions.html">Transactions</a>
+      <a href="transfer.html">Transfer</a>
+      <a href="profile.html">Profile</a>
+      <a href="notifications.html">Notifications</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </header>
+
+  <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
+  <div id="modal-root" class="modal-root" aria-hidden="true"></div>
+
+  <div class="app-shell layout">
+    <aside class="app-sidebar sidebar" aria-label="User sidebar">
+      <div>
+        <div class="sidebar__section-title">Navigation</div>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="accounts.html">Accounts</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="transfer.html">Transfer</a>
+      </div>
+      <div>
+        <div class="sidebar__section-title">Profile</div>
+        <a href="profile.html">Profile</a>
+        <a href="notifications.html">Notifications</a>
+        <a href="login.html">Logout</a>
+      </div>
+    </aside>
+
+    <main class="app-main main-content">
+      <header class="section-header">
+        <div>
+          <h1>Transfer receipt</h1>
+          <p class="text-muted">A clear summary of the transfer you just submitted.</p>
+        </div>
+        <div class="navbar__actions">
+          <button class="btn btn--ghost" type="button">Download PDF</button>
+          <button class="btn btn--primary" type="button">New transfer</button>
+        </div>
+      </header>
+
+      <section class="card stack-md">
+        <div class="card__header">
+          <h2 class="card__title">Confirmation</h2>
+          <span class="badge badge--success">Completed</span>
+        </div>
+        <div class="section-grid">
+          <div>
+            <p class="text-muted">Reference</p>
+            <p><strong>TXN-2048-482</strong></p>
+          </div>
+          <div>
+            <p class="text-muted">Date</p>
+            <p><strong>Apr 18, 2024</strong></p>
+          </div>
+          <div>
+            <p class="text-muted">Amount</p>
+            <p><strong>$300.00</strong></p>
+          </div>
+          <div>
+            <p class="text-muted">Status</p>
+            <p><strong>Settled</strong></p>
+          </div>
+        </div>
+        <div class="section-grid">
+          <div>
+            <p class="text-muted">From</p>
+            <p><strong>Everyday Checking ••24</strong></p>
+          </div>
+          <div>
+            <p class="text-muted">To</p>
+            <p><strong>Rainy Day Savings ••77</strong></p>
+          </div>
+          <div>
+            <p class="text-muted">Memo</p>
+            <p><strong>Monthly savings move</strong></p>
+          </div>
+          <div>
+            <p class="text-muted">Prepared by</p>
+            <p><strong>Alex Morgan</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="card__title">Next steps</h2>
+          <span class="text-muted">Keep this receipt for your records.</span>
+        </div>
+        <p>If you need a signature or additional confirmation, download the PDF or contact your officer.</p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="app-footer">
+    <div class="main-content">
+      <p class="text-muted">© 2024 Bankly. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div id="contact-officer-modal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contact-officer-title">
+      <div class="modal__header">
+        <h2 id="contact-officer-title" class="modal__title">Contact Account Officer</h2>
+        <button class="modal__close" type="button" aria-label="Close">×</button>
+      </div>
+      <div class="modal__body stack-md">
+        <p>Share this receipt or ask questions about the transfer status.</p>
+        <div class="card stack-sm">
+          <div><strong>Name:</strong> <span id="officer-name">Avery Lane</span></div>
+          <div><strong>Phone:</strong> <span id="officer-phone">(800) 555-0141</span></div>
+          <div><strong>Email:</strong> <span id="officer-email">avery.lane@bankly.io</span></div>
+          <div><strong>Reference:</strong> <span id="officer-ref">REF-48219</span></div>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" type="button">Close</button>
+        <button class="btn btn--primary" type="button">Send message</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

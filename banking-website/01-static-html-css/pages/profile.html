@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile | Bankly</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/dashboard.css">
+</head>
+<body class="page-shell">
+  <header class="app-header navbar">
+    <div class="navbar__brand">Bankly</div>
+    <nav class="navbar__actions" aria-label="User navigation">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="accounts.html">Accounts</a>
+      <a href="transactions.html">Transactions</a>
+      <a href="transfer.html">Transfer</a>
+      <a href="profile.html" aria-current="page">Profile</a>
+      <a href="notifications.html">Notifications</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </header>
+
+  <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
+  <div id="modal-root" class="modal-root" aria-hidden="true"></div>
+
+  <div class="app-shell layout">
+    <aside class="app-sidebar sidebar" aria-label="User sidebar">
+      <div>
+        <div class="sidebar__section-title">Navigation</div>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="accounts.html">Accounts</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="transfer.html">Transfer</a>
+      </div>
+      <div>
+        <div class="sidebar__section-title">Profile</div>
+        <a href="profile.html" aria-current="page">Profile</a>
+        <a href="notifications.html">Notifications</a>
+        <a href="login.html">Logout</a>
+      </div>
+    </aside>
+
+    <main class="app-main main-content">
+      <header class="section-header">
+        <div>
+          <h1>Your profile</h1>
+          <p class="text-muted">Keep your contact information and security preferences up to date.</p>
+        </div>
+        <button class="btn btn--primary" type="button">Save changes</button>
+      </header>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="card__title">Contact details</h2>
+          <span class="text-muted">Used for notifications and security alerts.</span>
+        </div>
+        <form class="stack-md">
+          <div class="section-grid">
+            <div class="form-group">
+              <label for="profile-name">Full name</label>
+              <input id="profile-name" type="text" class="input" placeholder="Alex Morgan">
+            </div>
+            <div class="form-group">
+              <label for="profile-email">Email address</label>
+              <input id="profile-email" type="email" class="input" placeholder="you@example.com">
+            </div>
+          </div>
+          <div class="section-grid">
+            <div class="form-group">
+              <label for="profile-phone">Phone number</label>
+              <input id="profile-phone" type="tel" class="input" placeholder="(555) 555-1234">
+            </div>
+            <div class="form-group">
+              <label for="profile-address">Mailing address</label>
+              <input id="profile-address" type="text" class="input" placeholder="123 Finance Ave, New York, NY">
+            </div>
+          </div>
+          <div class="section-grid">
+            <div class="form-group">
+              <label for="profile-language">Preferred language</label>
+              <select id="profile-language" class="input">
+                <option>English</option>
+                <option>Spanish</option>
+                <option>French</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="profile-timezone">Time zone</label>
+              <select id="profile-timezone" class="input">
+                <option>Eastern (EST)</option>
+                <option>Central (CST)</option>
+                <option>Pacific (PST)</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="card__title">Security</h2>
+          <span class="text-muted">Keep your account protected.</span>
+        </div>
+        <div class="stack-md">
+          <div class="form-group">
+            <label for="profile-password">Update password</label>
+            <input id="profile-password" type="password" class="input" placeholder="New password">
+          </div>
+          <div class="form-group">
+            <label for="profile-pin">Set a 4-digit PIN</label>
+            <input id="profile-pin" type="number" class="input" placeholder="1234">
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="app-footer">
+    <div class="main-content">
+      <p class="text-muted">© 2024 Bankly. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div id="contact-officer-modal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contact-officer-title">
+      <div class="modal__header">
+        <h2 id="contact-officer-title" class="modal__title">Contact Account Officer</h2>
+        <button class="modal__close" type="button" aria-label="Close">×</button>
+      </div>
+      <div class="modal__body stack-md">
+        <p>Need to verify your profile details? Reach your officer for assistance.</p>
+        <div class="card stack-sm">
+          <div><strong>Name:</strong> <span id="officer-name">Avery Lane</span></div>
+          <div><strong>Phone:</strong> <span id="officer-phone">(800) 555-0141</span></div>
+          <div><strong>Email:</strong> <span id="officer-email">avery.lane@bankly.io</span></div>
+          <div><strong>Reference:</strong> <span id="officer-ref">REF-48219</span></div>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" type="button">Close</button>
+        <button class="btn btn--primary" type="button">Send message</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

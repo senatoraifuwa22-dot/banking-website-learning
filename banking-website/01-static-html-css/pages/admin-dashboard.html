@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Bankly</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/admin.css">
+</head>
+<body class="page-shell">
+  <header class="app-header navbar">
+    <div class="navbar__brand">Bankly Admin</div>
+    <nav class="navbar__actions" aria-label="Admin navigation">
+      <a href="admin-dashboard.html" aria-current="page">Admin Dashboard</a>
+      <a href="admin-users.html">Users</a>
+      <a href="admin-accounts.html">Accounts</a>
+      <a href="admin-transactions.html">Transactions</a>
+      <a href="admin-audit.html">Audit</a>
+      <a href="admin-login.html">Logout</a>
+    </nav>
+  </header>
+
+  <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
+  <div id="modal-root" class="modal-root" aria-hidden="true"></div>
+
+  <div class="app-shell layout">
+    <aside class="app-sidebar sidebar" aria-label="Admin sidebar">
+      <div>
+        <div class="sidebar__section-title">Overview</div>
+        <a href="admin-dashboard.html" aria-current="page">Admin Dashboard</a>
+        <a href="admin-users.html">Users</a>
+        <a href="admin-accounts.html">Accounts</a>
+        <a href="admin-transactions.html">Transactions</a>
+        <a href="admin-audit.html">Audit</a>
+      </div>
+      <div>
+        <div class="sidebar__section-title">Session</div>
+        <a href="admin-login.html">Logout</a>
+      </div>
+    </aside>
+
+    <main class="app-main main-content">
+      <header class="section-header">
+        <div>
+          <h1>Control center</h1>
+          <p class="text-muted">Monitor key metrics, approvals, and risk signals across the platform.</p>
+        </div>
+        <button class="btn btn--primary" type="button">Create admin note</button>
+      </header>
+
+      <div class="section-grid">
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Active customers</h2>
+            <span class="badge badge--success">+4 today</span>
+          </div>
+          <p class="card__body"><strong>18,204</strong> active profiles</p>
+        </div>
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Open tickets</h2>
+            <span class="badge badge--warning">Action needed</span>
+          </div>
+          <p class="card__body"><strong>42</strong> pending reviews</p>
+        </div>
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Risk alerts</h2>
+            <span class="badge badge--danger">3 high</span>
+          </div>
+          <p class="card__body">Latest: Large transfer flagged for review.</p>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="card__title">Pending approvals</h2>
+          <a class="btn btn--link" href="admin-transactions.html">View queue</a>
+        </div>
+        <table class="table" aria-label="Pending approvals">
+          <thead>
+            <tr>
+              <th scope="col">Request</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Limit increase</td>
+              <td>Alex Morgan</td>
+              <td>$5,000</td>
+              <td><span class="badge badge--warning">Awaiting review</span></td>
+            </tr>
+            <tr>
+              <td>International transfer</td>
+              <td>Jordan Rivers</td>
+              <td>$12,400</td>
+              <td><span class="badge badge--info">In progress</span></td>
+            </tr>
+            <tr>
+              <td>Account closure</td>
+              <td>Casey Lee</td>
+              <td>$0</td>
+              <td><span class="badge badge--success">Approved</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <footer class="app-footer">
+    <div class="main-content">
+      <p class="text-muted">© 2024 Bankly. Admin workspace.</p>
+    </div>
+  </footer>
+
+  <div id="contact-officer-modal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contact-officer-title">
+      <div class="modal__header">
+        <h2 id="contact-officer-title" class="modal__title">Contact Account Officer</h2>
+        <button class="modal__close" type="button" aria-label="Close">×</button>
+      </div>
+      <div class="modal__body stack-md">
+        <p>Connect with the officer assigned to this portfolio for quick escalation.</p>
+        <div class="card stack-sm">
+          <div><strong>Name:</strong> <span id="officer-name">Avery Lane</span></div>
+          <div><strong>Phone:</strong> <span id="officer-phone">(800) 555-0141</span></div>
+          <div><strong>Email:</strong> <span id="officer-email">avery.lane@bankly.io</span></div>
+          <div><strong>Reference:</strong> <span id="officer-ref">REF-48219</span></div>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" type="button">Close</button>
+        <button class="btn btn--primary" type="button">Send message</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

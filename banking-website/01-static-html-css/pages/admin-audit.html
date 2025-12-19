@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Audit | Bankly</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/transactions.css">
+</head>
+<body class="page-shell">
+  <header class="app-header navbar">
+    <div class="navbar__brand">Bankly Admin</div>
+    <nav class="navbar__actions" aria-label="Admin navigation">
+      <a href="admin-dashboard.html">Admin Dashboard</a>
+      <a href="admin-users.html">Users</a>
+      <a href="admin-accounts.html">Accounts</a>
+      <a href="admin-transactions.html">Transactions</a>
+      <a href="admin-audit.html" aria-current="page">Audit</a>
+      <a href="admin-login.html">Logout</a>
+    </nav>
+  </header>
+
+  <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
+  <div id="modal-root" class="modal-root" aria-hidden="true"></div>
+
+  <div class="app-shell layout">
+    <aside class="app-sidebar sidebar" aria-label="Admin sidebar">
+      <div>
+        <div class="sidebar__section-title">Overview</div>
+        <a href="admin-dashboard.html">Admin Dashboard</a>
+        <a href="admin-users.html">Users</a>
+        <a href="admin-accounts.html">Accounts</a>
+        <a href="admin-transactions.html">Transactions</a>
+        <a href="admin-audit.html" aria-current="page">Audit</a>
+      </div>
+      <div>
+        <div class="sidebar__section-title">Session</div>
+        <a href="admin-login.html">Logout</a>
+      </div>
+    </aside>
+
+    <main class="app-main main-content">
+      <header class="section-header">
+        <div>
+          <h1>Audit log</h1>
+          <p class="text-muted">Track admin actions and changes for compliance reviews.</p>
+        </div>
+        <div class="navbar__actions">
+          <button class="btn btn--ghost" type="button">Export log</button>
+          <button class="btn btn--primary" type="button">Archive</button>
+        </div>
+      </header>
+
+      <section class="card">
+        <div class="card__header">
+          <h2 class="card__title">Recent events</h2>
+          <span class="badge badge--info">24h</span>
+        </div>
+        <table class="table" aria-label="Audit events">
+          <thead>
+            <tr>
+              <th scope="col">Timestamp</th>
+              <th scope="col">User</th>
+              <th scope="col">Action</th>
+              <th scope="col">Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apr 18, 10:14</td>
+              <td>Jamie Fox</td>
+              <td>Approved transfer</td>
+              <td>TXN-8831 set to Cleared</td>
+            </tr>
+            <tr>
+              <td>Apr 18, 08:03</td>
+              <td>Priya Patel</td>
+              <td>Updated user role</td>
+              <td>Samir Chen → Risk reviewer</td>
+            </tr>
+            <tr>
+              <td>Apr 17, 17:44</td>
+              <td>Jamie Fox</td>
+              <td>Exported audit log</td>
+              <td>30-day CSV downloaded</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <footer class="app-footer">
+    <div class="main-content">
+      <p class="text-muted">© 2024 Bankly. Admin workspace.</p>
+    </div>
+  </footer>
+
+  <div id="contact-officer-modal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contact-officer-title">
+      <div class="modal__header">
+        <h2 id="contact-officer-title" class="modal__title">Contact Account Officer</h2>
+        <button class="modal__close" type="button" aria-label="Close">×</button>
+      </div>
+      <div class="modal__body stack-md">
+        <p>Escalate compliance questions to the assigned officer.</p>
+        <div class="card stack-sm">
+          <div><strong>Name:</strong> <span id="officer-name">Avery Lane</span></div>
+          <div><strong>Phone:</strong> <span id="officer-phone">(800) 555-0141</span></div>
+          <div><strong>Email:</strong> <span id="officer-email">avery.lane@bankly.io</span></div>
+          <div><strong>Reference:</strong> <span id="officer-ref">REF-48219</span></div>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--ghost" type="button">Close</button>
+        <button class="btn btn--primary" type="button">Send message</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
