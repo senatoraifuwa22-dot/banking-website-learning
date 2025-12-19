@@ -67,22 +67,23 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="to-account">To account</label>
-              <select id="to-account" class="input">
-                <option>Rainy Day Savings ••77</option>
-                <option>Everyday Checking ••24</option>
-              </select>
+              <label for="to-bank">Receiving bank</label>
+              <input id="to-bank" type="text" class="input" placeholder="Bank name or code">
             </div>
           </div>
           <div class="section-grid">
             <div class="form-group">
+              <label for="to-account">Recipient account</label>
+              <input id="to-account" type="text" class="input" placeholder="Account number or IBAN">
+            </div>
+            <div class="form-group">
               <label for="amount">Amount</label>
               <input id="amount" type="number" class="input" placeholder="0.00">
             </div>
-            <div class="form-group">
-              <label for="memo">Memo (optional)</label>
-              <input id="memo" type="text" class="input" placeholder="Add a note">
-            </div>
+          </div>
+          <div class="form-group">
+            <label for="memo">Note (optional)</label>
+            <input id="memo" type="text" class="input" placeholder="Add a short message">
           </div>
           <div class="form-group">
             <label for="transfer-date">Transfer date</label>

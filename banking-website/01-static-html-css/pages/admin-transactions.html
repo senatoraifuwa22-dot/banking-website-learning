@@ -93,6 +93,36 @@
           </tbody>
         </table>
       </section>
+
+      <section class="card stack-md" aria-labelledby="edit-status-title">
+        <div class="card__header">
+          <h2 id="edit-status-title" class="card__title">Edit status</h2>
+          <span class="text-muted">Placeholder controls for updating transaction outcomes.</span>
+        </div>
+        <form class="section-grid">
+          <div class="form-group">
+            <label for="edit-reference">Reference ID</label>
+            <input id="edit-reference" type="text" class="input" placeholder="TXN-0000">
+          </div>
+          <div class="form-group">
+            <label for="edit-status">New status</label>
+            <select id="edit-status" class="input">
+              <option>Pending</option>
+              <option>Cleared</option>
+              <option>Review</option>
+              <option>Declined</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="edit-notes">Notes</label>
+            <input id="edit-notes" type="text" class="input" placeholder="Add context or decision reason">
+          </div>
+        </form>
+        <div class="section-header">
+          <span class="text-muted">Use this section to model status updates.</span>
+          <button class="btn btn--primary" type="button">Save status</button>
+        </div>
+      </section>
     </main>
   </div>
 
