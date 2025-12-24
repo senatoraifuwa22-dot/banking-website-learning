@@ -115,6 +115,9 @@ const mockState = {
       password: "password123",
       name: "Demo Customer",
       role: "customer",
+      phone: "+1 (555) 010-7788",
+      address: "123 Market Street, Springfield, USA",
+      createdAt: Date.now() - 1000 * 60 * 60 * 24 * 45,
     },
   ],
   tokens: new Map(),
@@ -223,6 +226,9 @@ const createMockUser = ({ email, password, name }) => {
     password,
     name: name || email?.split("@")[0] || "New Customer",
     role: "customer",
+    phone: "",
+    address: "",
+    createdAt: Date.now(),
   };
   mockState.users.push(newUser);
   mockState.accounts.push({
@@ -295,6 +301,18 @@ const mockAuth = {
       user.role = "customer";
     }
 
+    if (!user.createdAt) {
+      user.createdAt = Date.now();
+    }
+
+    if (typeof user.phone === "undefined") {
+      user.phone = "";
+    }
+
+    if (typeof user.address === "undefined") {
+      user.address = "";
+    }
+
     const token = issueDemoToken(user.id);
     return { token, user: { id: user.id, email: user.email, name: user.name, role: user.role } };
   },
@@ -317,6 +335,20 @@ const mockTransactions = async (authToken, { accountId } = {}) => {
   return mockState.transactions
     .filter((tx) => (accountId ? tx.accountId === accountId : allowedAccountIds.includes(tx.accountId)))
     .sort((a, b) => b.createdAt - a.createdAt);
+};
+
+const mockProfile = async (authToken) => {
+  const user = await requireAuth(authToken);
+
+  return {
+    profile: {
+      fullName: user.name || user.fullName || "",
+      email: user.email || "",
+      phone: user.phone || "",
+      address: user.address || "",
+      createdAt: user.createdAt || user.created_at || Date.now(),
+    },
+  };
 };
 
 const mockNotifications = {
@@ -595,6 +627,8 @@ const routeMockRequest = async ({ path, method, body = {}, authToken }) => {
 
     case normalizedPath === "accounts" && method === "GET":
       return mockAccounts(authToken);
+    case normalizedPath === "profile" && method === "GET":
+      return mockProfile(authToken);
 
     case normalizedPath.startsWith("transactions") && method === "GET": {
       const url = new URL(`https://demo.local/${normalizedPath}`);

@@ -110,6 +110,7 @@ const pageInitializers = {
   "receipt.html": () => loadPageModule("./js/receipt.js", "initReceipt", "receipt"),
   "notifications.html": () =>
     loadPageModule("./js/notifications.js", "initNotifications", "notifications"),
+  "profile.html": () => loadPageModule("./js/profile.js", "initProfile", "profile"),
 };
 
 /**
