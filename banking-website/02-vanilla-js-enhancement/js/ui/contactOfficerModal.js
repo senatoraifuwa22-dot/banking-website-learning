@@ -45,7 +45,7 @@ const createFallbackTemplate = () => {
           <p style="margin:0; font-size:0.85rem; color:#475569;">Need to speak with us?</p>
           <h2 style="margin:0; font-size:1.35rem; color:#0f172a;">Contact your account officer</h2>
         </div>
-        <button type="button" aria-label="Close contact modal" id="close-contact-modal" style="background:none; border:none; font-size:1.25rem; cursor:pointer;">×</button>
+        <button type="button" aria-label="Close contact account officer modal" id="close-contact-modal" style="background:none; border:none; font-size:1.25rem; cursor:pointer;">×</button>
       </header>
       <section style="margin-top:1rem; display:grid; gap:0.5rem;">
         <p id="officer-reason" style="margin:0; color:#334155;"></p>
@@ -101,7 +101,7 @@ export const openContactOfficerModal = ({ officer = {}, referenceCode, reason } 
 
   if (!content) {
     // As a last resort, show a tiny error modal.
-    openModal("Unable to load contact officer details right now.");
+    openModal("Unable to load account officer details right now.");
     return;
   }
 
