@@ -55,6 +55,8 @@ const initModalSystem = () => {
   modalRoot.style.position = "fixed";
   modalRoot.style.inset = "0";
   modalRoot.style.zIndex = "9000";
+  // Keep the placeholder container from intercepting clicks until a modal overlay exists.
+  modalRoot.style.pointerEvents = "none";
 
   document.body.appendChild(modalRoot);
 };

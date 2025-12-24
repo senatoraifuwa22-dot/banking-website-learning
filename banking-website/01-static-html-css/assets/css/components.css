@@ -196,6 +196,18 @@ label {
 }
 
 /* Modal styles */
+#modal-root,
+.modal-root {
+  /* Keep the always-present modal root from blocking clicks (like the navbar)
+     when no modal is mounted. Pointer events are re-enabled on the overlay. */
+  pointer-events: none;
+}
+
+.modal-overlay {
+  /* The overlay captures clicks to close the modal and blocks background UI. */
+  pointer-events: auto;
+}
+
 .modal-backdrop {
   position: fixed;
   inset: 0;
