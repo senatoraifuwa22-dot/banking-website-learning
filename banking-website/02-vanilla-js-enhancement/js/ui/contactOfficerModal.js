@@ -43,7 +43,7 @@ const createFallbackTemplate = () => {
       <header style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
         <div>
           <p style="margin:0; font-size:0.85rem; color:#475569;">Need to speak with us?</p>
-          <h2 style="margin:0; font-size:1.35rem; color:#0f172a;">Contact your loan officer</h2>
+          <h2 style="margin:0; font-size:1.35rem; color:#0f172a;">Contact your account officer</h2>
         </div>
         <button type="button" aria-label="Close contact modal" id="close-contact-modal" style="background:none; border:none; font-size:1.25rem; cursor:pointer;">×</button>
       </header>
