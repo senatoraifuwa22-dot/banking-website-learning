@@ -409,6 +409,65 @@ const mockTransfer = {
   },
 };
 
+const mockSimpleTransfer = async (authToken, { fromAccountId, toAccountId, toAccount, amount, note }) => {
+  const user = await requireAuth(authToken);
+  const numericAmount = Number(amount);
+
+  if (!fromAccountId || (!toAccountId && !toAccount) || !Number.isFinite(numericAmount) || numericAmount <= 0) {
+    await handleFailure({ errorCode: "VALIDATION", message: "Please provide all transfer details." }, "Create transfer");
+  }
+
+  const fromAccount = mockState.accounts.find((acct) => acct.id === fromAccountId && acct.userId === user.id);
+  if (!fromAccount) {
+    await handleFailure({ errorCode: "ACCOUNT_NOT_FOUND", message: "Source account not found." }, "Create transfer");
+  }
+
+  const destinationAccount = toAccountId
+    ? mockState.accounts.find((acct) => acct.id === toAccountId && acct.userId === user.id)
+    : null;
+
+  if (toAccountId && !destinationAccount) {
+    await handleFailure({ errorCode: "ACCOUNT_NOT_FOUND", message: "Destination account not found." }, "Create transfer");
+  }
+
+  if (numericAmount > fromAccount.balance) {
+    await handleFailure({ errorCode: "INSUFFICIENT_FUNDS", message: "Insufficient funds for this transfer." }, "Create transfer");
+  }
+
+  fromAccount.balance -= numericAmount;
+  if (destinationAccount) {
+    destinationAccount.balance += numericAmount;
+  }
+
+  const receiptId = generateId("tx");
+  mockState.transactions.push({
+    id: receiptId,
+    accountId: fromAccount.id,
+    description: note || "Transfer",
+    amount: -numericAmount,
+    createdAt: Date.now(),
+  });
+
+  if (destinationAccount) {
+    mockState.transactions.push({
+      id: generateId("tx"),
+      accountId: destinationAccount.id,
+      description: note || "Incoming transfer",
+      amount: numericAmount,
+      createdAt: Date.now(),
+    });
+  }
+
+  return {
+    reference: makeReferenceCode(),
+    receiptId,
+    amount: numericAmount,
+    fromAccount: fromAccount.number,
+    toAccount: destinationAccount?.number || toAccount || toAccountId,
+    currency: fromAccount.currency,
+  };
+};
+
 // ---------------------------------------------------------------------------
 // Public API request router
 // ---------------------------------------------------------------------------
@@ -470,6 +529,9 @@ const routeMockRequest = async ({ path, method, body = {}, authToken }) => {
       const accountId = url.searchParams.get("accountId");
       return mockTransactions(authToken, { accountId });
     }
+
+    case normalizedPath === "transfers" && method === "POST":
+      return mockSimpleTransfer(authToken, body);
 
     case normalizedPath === "transfer/initiate" && method === "POST":
       return mockTransfer.initiate(authToken, body);
