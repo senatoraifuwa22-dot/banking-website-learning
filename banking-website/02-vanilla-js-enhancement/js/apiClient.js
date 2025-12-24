@@ -162,7 +162,10 @@ const mockState = {
   transfers: new Map(),
 };
 
-const makeId = (prefix) => `${prefix}-${Math.random().toString(36).slice(2, 8)}`;
+const generateId = (prefix) => {
+  const rawId = globalThis.crypto?.randomUUID?.() || Math.random().toString(36).slice(2, 12);
+  return `${prefix}-${rawId}`;
+};
 
 // All tokens share a predictable prefix so learners can see how auth flows work.
 const issueDemoToken = (userId) => {
@@ -177,7 +180,7 @@ const issueDemoToken = (userId) => {
  */
 const createMockUser = ({ email, password, name }) => {
   const newUser = {
-    id: makeId("user"),
+    id: generateId("user"),
     email,
     password,
     name: name || email?.split("@")[0] || "New Customer",
@@ -185,7 +188,7 @@ const createMockUser = ({ email, password, name }) => {
   };
   mockState.users.push(newUser);
   mockState.accounts.push({
-    id: makeId("acct"),
+    id: generateId("acct"),
     userId: newUser.id,
     name: "New Checking",
     number: `${Math.floor(Math.random() * 9e9) + 1e9}`,
@@ -295,7 +298,7 @@ const mockTransfer = {
       await handleFailure({ errorCode: "INSUFFICIENT_FUNDS", message: "Insufficient funds for this transfer." }, "Initiate transfer");
     }
 
-    const transferId = makeId("transfer");
+    const transferId = generateId("transfer");
     mockState.transfers.set(transferId, {
       id: transferId,
       userId: user.id,
@@ -380,7 +383,7 @@ const mockTransfer = {
       toAccount.balance += transfer.amount;
     }
 
-    const receiptId = makeId("tx");
+    const receiptId = generateId("tx");
     mockState.transactions.push({
       id: receiptId,
       accountId: fromAccount.id,
