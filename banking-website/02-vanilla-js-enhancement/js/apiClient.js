@@ -78,6 +78,7 @@ const mockState = {
       email: "demo@bank.test",
       password: "password123",
       name: "Demo Customer",
+      role: "customer",
     },
   ],
   tokens: new Map(),
@@ -127,8 +128,48 @@ const mockState = {
 
 const makeId = (prefix) => `${prefix}-${Math.random().toString(36).slice(2, 8)}`;
 
+// All tokens share a predictable prefix so learners can see how auth flows work.
+const issueDemoToken = (userId) => {
+  const token = `demo-token-${userId}`;
+  mockState.tokens.set(token, userId);
+  return token;
+};
+
+/**
+ * Helper to standardize new user creation so register/login behave the same.
+ * New users receive a starter checking account so the rest of the UI renders.
+ */
+const createMockUser = ({ email, password, name }) => {
+  const newUser = {
+    id: makeId("user"),
+    email,
+    password,
+    name: name || email?.split("@")[0] || "New Customer",
+    role: "customer",
+  };
+  mockState.users.push(newUser);
+  mockState.accounts.push({
+    id: makeId("acct"),
+    userId: newUser.id,
+    name: "New Checking",
+    number: `${Math.floor(Math.random() * 9e9) + 1e9}`,
+    balance: 0,
+    currency: "USD",
+  });
+  return newUser;
+};
+
 const requireAuth = async (authToken) => {
-  const userId = mockState.tokens.get(authToken);
+  // Prefer the token map, but also allow direct demo tokens so reloads remain seamless.
+  let userId = mockState.tokens.get(authToken);
+  if (!userId && authToken?.startsWith("demo-token-")) {
+    const derivedId = authToken.replace("demo-token-", "");
+    const knownUser = mockState.users.find((u) => u.id === derivedId);
+    if (knownUser) {
+      userId = derivedId;
+      mockState.tokens.set(authToken, derivedId);
+    }
+  }
   if (!userId) {
     await handleFailure({ errorCode: "UNAUTHORIZED", message: "Please sign in to continue." }, "Authentication");
   }
@@ -154,36 +195,33 @@ const mockAuth = {
       await handleFailure({ errorCode: "EMAIL_IN_USE", message: "This email is already registered." }, "Registration");
     }
 
-    const newUser = { id: makeId("user"), email, password, name: name || "New Customer" };
-    mockState.users.push(newUser);
-
-    // New customers start with a blank checking account for the demo.
-    mockState.accounts.push({
-      id: makeId("acct"),
-      userId: newUser.id,
-      name: "New Checking",
-      number: `${Math.floor(Math.random() * 9e9) + 1e9}`,
-      balance: 0,
-      currency: "USD",
-    });
-
-    const token = makeId("token");
-    mockState.tokens.set(token, newUser.id);
-    return { user: { id: newUser.id, email: newUser.email, name: newUser.name }, token };
+    const newUser = createMockUser({ email, password, name });
+    const token = issueDemoToken(newUser.id);
+    return { user: { id: newUser.id, email: newUser.email, name: newUser.name, role: newUser.role }, token };
   },
   login: async ({ email, password }) => {
-    const user = mockState.users.find((u) => u.email === email && u.password === password);
-    if (!user) {
-      await handleFailure({ errorCode: "INVALID_CREDENTIALS", message: "Incorrect email or password." }, "Login");
+    // For the learning experience we accept any credentials. If the user
+    // already exists we return their details; otherwise we create them on the fly.
+    if (!email || !password) {
+      await handleFailure({ errorCode: "VALIDATION", message: "Email and password are required." }, "Login");
     }
 
-    const token = makeId("token");
-    mockState.tokens.set(token, user.id);
-    return { user: { id: user.id, email: user.email, name: user.name }, token };
+    let user = mockState.users.find((u) => u.email === email);
+    if (!user) {
+      user = createMockUser({ email, password });
+    }
+
+    // Preserve older seed data that might not have a role assigned.
+    if (!user.role) {
+      user.role = "customer";
+    }
+
+    const token = issueDemoToken(user.id);
+    return { token, user: { id: user.id, email: user.email, name: user.name, role: user.role } };
   },
   me: async (authToken) => {
     const user = await requireAuth(authToken);
-    return { user: { id: user.id, email: user.email, name: user.name } };
+    return { user: { id: user.id, email: user.email, name: user.name, role: user.role } };
   },
 };
 
@@ -405,4 +443,3 @@ const routeMockRequest = async ({ path, method, body = {}, authToken }) => {
       await handleFailure({ message: `Unknown endpoint: ${path}` }, "Unknown request");
   }
 };
-
