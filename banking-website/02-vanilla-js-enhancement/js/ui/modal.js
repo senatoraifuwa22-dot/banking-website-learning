@@ -27,7 +27,12 @@ const ensureModalRoot = () => {
     modalRoot.style.position = "fixed";
     modalRoot.style.inset = "0";
     modalRoot.style.zIndex = "9000";
+    // Leave the container inert until an overlay is mounted so it cannot block UI like the navbar.
+    modalRoot.style.pointerEvents = "none";
     document.body.appendChild(modalRoot);
+  } else {
+    // If a server-rendered modal root already exists, make sure it stays inert by default.
+    modalRoot.style.pointerEvents = "none";
   }
 
   return modalRoot;
@@ -80,6 +85,9 @@ export const openModal = (elementOrHtmlString) => {
 
   // The overlay dims the background and captures clicks.
   const overlay = document.createElement("div");
+  // Class name lets CSS re-enable pointer events only when an overlay is present,
+  // keeping the always-mounted #modal-root from blocking the page.
+  overlay.classList.add("modal-overlay");
   currentOverlay = overlay;
   overlay.style.position = "fixed";
   overlay.style.inset = "0";
