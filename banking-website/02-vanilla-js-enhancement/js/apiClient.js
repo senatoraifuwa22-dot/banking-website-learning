@@ -42,6 +42,40 @@ const fetchOfficerContact = async () => {
 };
 
 /**
+ * Decide whether a failure should escalate to the contact officer flow.
+ * User/validation errors only show a toast, while serious/unknown issues
+ * should also open the contact modal.
+ */
+export const shouldEscalateToOfficer = (errorLike = {}) => {
+  const code = errorLike.errorCode;
+
+  // Serious or unknown errors should escalate.
+  const escalatingCodes = new Set(["CONTACT_OFFICER", "OTP_LOCKED"]);
+
+  if (!code) return true;
+  if (escalatingCodes.has(code)) return true;
+
+  // Known user-caused or expected errors that should not escalate.
+  const nonEscalatingCodes = new Set([
+    "VALIDATION",
+    "EMAIL_IN_USE",
+    "INVALID_CREDENTIALS",
+    "UNAUTHORIZED",
+    "ACCOUNT_NOT_FOUND",
+    "INSUFFICIENT_FUNDS",
+    "TRANSFER_NOT_FOUND",
+    "OTP_EXPIRED",
+    "OTP_INVALID",
+    "OTP_REQUIRED",
+  ]);
+
+  if (nonEscalatingCodes.has(code)) return false;
+
+  // Unknown error codes should escalate for safety.
+  return true;
+};
+
+/**
  * Centralized failure handler.
  *
  * Every error goes through here so we always show a toast, open the
@@ -58,9 +92,11 @@ export const handleFailure = async (errorLike, context = "") => {
   // Show a quick toast so the user immediately knows something failed.
   createToast(`${normalizedError.message} (Ref: ${reference})`, { type: "error" });
 
-  // Open the modal with officer details and the reference number.
-  const officer = await fetchOfficerContact();
-  openContactOfficerModal({ officer, referenceCode: reference, reason: context });
+  if (shouldEscalateToOfficer(normalizedError)) {
+    // Open the modal with officer details and the reference number.
+    const officer = await fetchOfficerContact();
+    openContactOfficerModal({ officer, referenceCode: reference, reason: context });
+  }
 
   // Throw so callers can short-circuit their workflows.
   throw normalizedError;
@@ -209,6 +245,8 @@ const mockAuth = {
     let user = mockState.users.find((u) => u.email === email);
     if (!user) {
       user = createMockUser({ email, password });
+    } else if (user.password !== password) {
+      await handleFailure({ errorCode: "INVALID_CREDENTIALS", message: "Invalid email or password." }, "Login");
     }
 
     // Preserve older seed data that might not have a role assigned.
