@@ -159,6 +159,44 @@ const mockState = {
       createdAt: Date.now() - 1000 * 60 * 60 * 30,
     },
   ],
+  notifications: [
+    {
+      id: "notif-1",
+      userId: "user-1",
+      type: "success",
+      title: "Deposit received",
+      message: "Your payroll deposit of $2,900.00 is available.",
+      timestamp: Date.now() - 1000 * 60 * 60 * 2,
+      read: false,
+    },
+    {
+      id: "notif-2",
+      userId: "user-1",
+      type: "warning",
+      title: "Low balance alert",
+      message: "Your checking account dipped below $100 yesterday.",
+      timestamp: Date.now() - 1000 * 60 * 60 * 14,
+      read: false,
+    },
+    {
+      id: "notif-3",
+      userId: "user-1",
+      type: "info",
+      title: "Transfer scheduled",
+      message: "$300.00 to Rainy Day Savings scheduled for Friday.",
+      timestamp: Date.now() - 1000 * 60 * 60 * 36,
+      read: true,
+    },
+    {
+      id: "notif-4",
+      userId: "user-1",
+      type: "info",
+      title: "Profile updated",
+      message: "You changed your mailing address on Apr 20.",
+      timestamp: Date.now() - 1000 * 60 * 60 * 72,
+      read: true,
+    },
+  ],
   transfers: new Map(),
 };
 
@@ -279,6 +317,40 @@ const mockTransactions = async (authToken, { accountId } = {}) => {
   return mockState.transactions
     .filter((tx) => (accountId ? tx.accountId === accountId : allowedAccountIds.includes(tx.accountId)))
     .sort((a, b) => b.createdAt - a.createdAt);
+};
+
+const mockNotifications = {
+  list: async (authToken) => {
+    const user = await requireAuth(authToken);
+    return mockState.notifications
+      .filter((notification) => notification.userId === user.id)
+      .sort((a, b) => b.timestamp - a.timestamp);
+  },
+  markRead: async (authToken, notificationId) => {
+    const user = await requireAuth(authToken);
+    const notification = mockState.notifications.find(
+      (item) => item.id === notificationId && item.userId === user.id
+    );
+
+    if (!notification) {
+      await handleFailure(
+        { errorCode: "NOTIFICATION_NOT_FOUND", message: "Notification not found." },
+        "Mark notification as read"
+      );
+    }
+
+    notification.read = true;
+    return { notification };
+  },
+  markAllRead: async (authToken) => {
+    const user = await requireAuth(authToken);
+    mockState.notifications.forEach((notification) => {
+      if (notification.userId === user.id) {
+        notification.read = true;
+      }
+    });
+    return { success: true };
+  },
 };
 
 const mockTransfer = {
@@ -529,6 +601,13 @@ const routeMockRequest = async ({ path, method, body = {}, authToken }) => {
       const accountId = url.searchParams.get("accountId");
       return mockTransactions(authToken, { accountId });
     }
+
+    case normalizedPath === "notifications" && method === "GET":
+      return mockNotifications.list(authToken);
+    case normalizedPath === "notifications/mark-read" && method === "POST":
+      return mockNotifications.markRead(authToken, body?.id);
+    case normalizedPath === "notifications/mark-all-read" && method === "POST":
+      return mockNotifications.markAllRead(authToken);
 
     case normalizedPath === "transfers" && method === "POST":
       return mockSimpleTransfer(authToken, body);

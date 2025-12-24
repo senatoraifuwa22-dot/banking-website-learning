@@ -108,6 +108,8 @@ const pageInitializers = {
     loadPageModule("./js/transactions.js", "initTransactions", "transactions"),
   "transfer.html": () => loadPageModule("./js/transfer.js", "initTransfer", "transfer"),
   "receipt.html": () => loadPageModule("./js/receipt.js", "initReceipt", "receipt"),
+  "notifications.html": () =>
+    loadPageModule("./js/notifications.js", "initNotifications", "notifications"),
 };
 
 /**
