@@ -71,6 +71,25 @@
       <p class="text-muted">© 2024 Bankly. All rights reserved.</p>
     </div>
   </footer>
+  <template id="contact-officer-modal">
+    <div class="stack-md">
+      <header class="modal__header">
+        <div>
+          <p class="text-muted" aria-hidden="true">Need to speak with us?</p>
+          <h2 class="modal__title">Contact your account officer</h2>
+        </div>
+        <button class="modal__close" type="button" aria-label="Close contact account officer modal" data-close-modal>&times;</button>
+      </header>
+      <section class="modal__body stack-sm">
+        <p id="officer-reason" class="text-muted"></p>
+        <div><strong>Name:</strong> <span id="officer-name"></span></div>
+        <div><strong>Phone:</strong> <span id="officer-phone"></span></div>
+        <div><strong>Email:</strong> <span id="officer-email"></span></div>
+        <div><strong>Reference code:</strong> <span id="officer-ref"></span></div>
+      </section>
+    </div>
+  </template>
+
   <script type="module" src="../../02-vanilla-js-enhancement/index.js"></script>
 </body>
 </html>
