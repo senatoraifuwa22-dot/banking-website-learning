@@ -123,7 +123,7 @@
 <body>
   <main class="container">
     <div class="notice">
-      <span id="redirectMessage">Redirecting to Bankly App...</span>
+      <span id="redirectMessage" aria-live="polite">Redirecting to Bankly App...</span>
       <button class="cancel-link" type="button" id="cancelRedirect">Cancel redirect</button>
     </div>
     <h1>Banking Website Learning</h1>
@@ -142,11 +142,14 @@
       const messageElement = document.getElementById('redirectMessage');
       const cancelButton = document.getElementById('cancelRedirect');
 
+      const links = document.querySelectorAll('.links a');
       let redirectTimeout = setTimeout(() => {
+        redirectTimeout = null;
+        cancelButton.setAttribute('disabled', 'disabled');
         window.location.href = redirectUrl;
       }, redirectDelay);
 
-      cancelButton.addEventListener('click', (event) => {
+      const cancelRedirect = (event) => {
         event.preventDefault();
         if (!redirectTimeout) return;
 
@@ -154,6 +157,17 @@
         redirectTimeout = null;
         messageElement.textContent = 'Redirect canceled. You can navigate using the links below.';
         cancelButton.setAttribute('disabled', 'disabled');
+      };
+
+      cancelButton.addEventListener('click', cancelRedirect);
+
+      links.forEach((link) => {
+        link.addEventListener('click', () => {
+          if (redirectTimeout) {
+            clearTimeout(redirectTimeout);
+            redirectTimeout = null;
+          }
+        });
       });
     })();
   </script>
