@@ -19,6 +19,7 @@ PORT=4000 npm start
 ## Current endpoints
 
 - `GET /health` — returns `{ ok: true, ts }` so you can confirm the API is running.
+  - Every request gets a `requestId` so errors can be traced easily. You can also send your own `x-request-id` header.
 
 ## Project structure
 
@@ -31,4 +32,5 @@ PORT=4000 npm start
 
 - Express is the only dependency to keep focus on core concepts.
 - Data is stored in memory and resets every time you restart the server.
+- Errors always return `{ errorCode, message, requestId }` for a predictable format.
 - More routes will be added in later steps—this is just the foundation.
