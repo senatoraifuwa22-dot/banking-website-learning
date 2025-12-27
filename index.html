@@ -48,6 +48,43 @@
       gap: 0.75rem;
     }
 
+    .notice {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: #ecfeff;
+      border: 1px solid #99f6e4;
+      color: #0f766e;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    .cancel-link {
+      background: none;
+      border: none;
+      color: #0f172a;
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0;
+    }
+
+    .cancel-link:focus-visible {
+      outline: 2px solid #0d9488;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    .cancel-link[disabled] {
+      color: #94a3b8;
+      cursor: default;
+      text-decoration: none;
+    }
+
     a.button {
       display: block;
       padding: 0.85rem 1rem;
@@ -85,6 +122,10 @@
 </head>
 <body>
   <main class="container">
+    <div class="notice">
+      <span id="redirectMessage">Redirecting to Bankly App...</span>
+      <button class="cancel-link" type="button" id="cancelRedirect">Cancel redirect</button>
+    </div>
     <h1>Banking Website Learning</h1>
     <p>This repository is a learning scaffold for the Banking Website exercises and supporting docs.</p>
     <div class="links">
@@ -94,5 +135,27 @@
       <a class="button" href="./banking-website/shared/docs/api-spec.md">API Spec</a>
     </div>
   </main>
+  <script>
+    (function() {
+      const redirectUrl = './banking-website/01-static-html-css/pages/index.html';
+      const redirectDelay = 1200;
+      const messageElement = document.getElementById('redirectMessage');
+      const cancelButton = document.getElementById('cancelRedirect');
+
+      let redirectTimeout = setTimeout(() => {
+        window.location.href = redirectUrl;
+      }, redirectDelay);
+
+      cancelButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (!redirectTimeout) return;
+
+        clearTimeout(redirectTimeout);
+        redirectTimeout = null;
+        messageElement.textContent = 'Redirect canceled. You can navigate using the links below.';
+        cancelButton.setAttribute('disabled', 'disabled');
+      });
+    })();
+  </script>
 </body>
 </html>
