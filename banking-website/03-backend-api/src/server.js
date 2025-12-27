@@ -3,7 +3,7 @@
 const express = require('express');
 const memoryDb = require('./db/memoryDb');
 const seedDatabase = require('./db/seed');
-const errorHandler = require('./middleware/errorHandler');
+const { errorHandler, createRequestId } = require('./middleware/errorHandler');
 
 const app = express();
 
@@ -17,6 +17,13 @@ app.use((req, res, next) => {
 
 // Parse JSON bodies so req.body works for future routes.
 app.use(express.json());
+
+// Attach a simple request id to every request for easier debugging.
+app.use((req, _res, next) => {
+  // Accept caller-provided request ids for traceability in future lessons.
+  req.requestId = req.headers['x-request-id'] || createRequestId();
+  next();
+});
 
 // Seed the in-memory database every time the server boots.
 seedDatabase(memoryDb);

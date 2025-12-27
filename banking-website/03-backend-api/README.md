@@ -1,37 +1,48 @@
-# 03 - Backend API (Express)
+// banking-website/03-backend-api/src/middleware/errorHandler.js
+// Central error handler with a consistent response shape.
+// Response format: { errorCode, message, requestId }
 
-This folder contains the starting point for the backend portion of the banking project. It is intentionally lightweight so you can focus on learning the Express fundamentals before adding authentication, validation, and real persistence.
+function randomId() {
+  // Short request id for learning/demo purposes.
+  // Example: REQ-A1B2C3
+  return `REQ-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+}
 
-## Quick start
+function errorHandler(err, req, res, next) {
+  // If something already started sending a response, delegate to Express default handler
+  if (res.headersSent) return next(err);
 
-```bash
-cd banking-website/03-backend-api
-npm install
-npm start
-```
+  const status = Number(err.status || err.statusCode || 500);
 
-The server listens on port `3001` by default. Set the `PORT` environment variable to override it:
+  // requestId may be set by earlier middleware. Fallback if not.
+  const requestId =
+    (req && (req.requestId || req.headers["x-request-id"])) || randomId();
 
-```bash
-PORT=4000 npm start
-```
+  // Prefer explicit errorCode, otherwise map common cases, otherwise CONTACT_OFFICER for 500.
+  const errorCode =
+    err.errorCode ||
+    (status === 401 ? "UNAUTHORIZED" : null) ||
+    (status === 403 ? "FORBIDDEN" : null) ||
+    (status === 404 ? "NOT_FOUND" : null) ||
+    (status === 400 ? "VALIDATION_ERROR" : null) ||
+    "CONTACT_OFFICER";
 
-## Current endpoints
+  const message =
+    err.message ||
+    (status >= 500
+      ? "Something went wrong. Please contact your account officer."
+      : "Request failed.");
 
-- `GET /health` — returns `{ ok: true, ts }` so you can confirm the API is running.
-- Every request receives an `x-request-id` header so errors and logs can be correlated easily.
+  // Helpful server-side log for learning
+  console.error("[API ERROR]", {
+    status,
+    errorCode,
+    requestId,
+    message,
+    stack: err.stack,
+  });
 
-## Project structure
+  res.status(status).json({ errorCode, message, requestId });
+}
 
-- `src/server.js` — sets up Express, seeds the in-memory database, and wires the error handler.
-- `src/db/memoryDb.js` — simple arrays plus CRUD helpers to mock a database.
-- `src/db/seed.js` — seeds one admin, one customer, starter accounts, and example transactions.
-- `src/middleware/errorHandler.js` — ensures all errors share the format `{ errorCode, message, requestId }`.
-
-## Notes for learners
-
-- Express is the only dependency to keep focus on core concepts.
-- Data is stored in memory and resets every time you restart the server.
-- Errors follow the format `{ errorCode, message, requestId }`. You can also send your own
-  `x-request-id` header to trace logs across multiple calls.
-- More routes will be added in later steps—this is just the foundation.
+module.exports = { errorHandler };

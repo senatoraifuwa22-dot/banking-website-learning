@@ -1,5 +1,6 @@
 // Centralized error handler to keep API responses predictable.
 // In later lessons you can expand this to log to a file or tracking service.
+// Small helper to make unique-ish identifiers without external packages.
 const createRequestId = () => `req_${Date.now()}_${Math.random().toString(16).slice(2, 8)}`;
 
 function errorHandler(err, req, res, _next) {
@@ -23,7 +24,12 @@ function errorHandler(err, req, res, _next) {
   });
 }
 
-// Expose the ID helper so the server can attach it to requests early.
-errorHandler.createRequestId = createRequestId;
+module.exports = {
+  errorHandler,
+  createRequestId
+};
 
-module.exports = errorHandler;
+module.exports = {
+  errorHandler,
+  createRequestId
+};
