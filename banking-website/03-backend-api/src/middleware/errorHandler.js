@@ -28,3 +28,8 @@ module.exports = {
   errorHandler,
   createRequestId
 };
+
+module.exports = {
+  errorHandler,
+  createRequestId
+};
