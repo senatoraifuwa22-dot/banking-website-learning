@@ -7,6 +7,14 @@ const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
+// Add a lightweight request id to every request so logs and errors can be traced.
+app.use((req, res, next) => {
+  const incomingRequestId = req.headers['x-request-id'];
+  req.requestId = incomingRequestId || errorHandler.createRequestId();
+  res.setHeader('x-request-id', req.requestId);
+  next();
+});
+
 // Parse JSON bodies so req.body works for future routes.
 app.use(express.json());
 
