@@ -23,4 +23,7 @@ function errorHandler(err, req, res, _next) {
   });
 }
 
+// Expose the ID helper so the server can attach it to requests early.
+errorHandler.createRequestId = createRequestId;
+
 module.exports = errorHandler;
