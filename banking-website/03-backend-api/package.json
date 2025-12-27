@@ -1,0 +1,13 @@
+{
+  "name": "banking-backend-api",
+  "version": "1.0.0",
+  "description": "Express backend scaffold for the banking website learning project.",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
